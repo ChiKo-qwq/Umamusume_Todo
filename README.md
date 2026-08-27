@@ -1,5 +1,5 @@
 # 赛马娘 共享清单（Umamusume Shared Todo List）
-
+原用于社团制品统计
 一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`），
 任何打开网页的人都能查看并更新同一份清单，进度实时同步，无需登录。
 
@@ -17,7 +17,7 @@
 
 | 端口 | 类型 | 说明 |
 | --- | --- | --- |
-| `2012` | 可写 | 可以切换状态、重置 |
+| `xxxx` | 可写 | 可以切换状态、重置 |
 | `3000` | 只读 | 只能查看，无法修改（适合投屏/分享给只看的人） |
 
 两个端口共享同一份数据和勾选状态，只读页会自动实时刷新。
@@ -37,7 +37,7 @@
 
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
-| `PORT` | `2012` | 可写界面端口 |
+| `PORT` | `xxxx` | 可写界面端口 |
 | `READONLY_PORT` | `3000` | 只读界面端口 |
 | `REFRESH_HOUR` | `0` | 每天刷新的小时（0-23） |
 | `REFRESH_MINUTE` | `0` | 每天刷新的分钟（0-59） |
@@ -110,7 +110,7 @@ docker compose up -d --build
 
 ### 方式 C：Nginx 反向代理（可选，绑定域名 + HTTPS）
 
-把 2012（可写）端口反代到你的域名：
+把 xxxx（可写）端口反代到你的域名：
 
 ```nginx
 server {
@@ -118,7 +118,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://127.0.0.1:2012;
+        proxy_pass http://127.0.0.1:xxxx;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -132,7 +132,7 @@ server {
 
 部署完成后有两个地址：
 
-- 可写界面（能勾选）：`http://你的服务器IP:2012`
+- 可写界面（能勾选）：`http://你的服务器IP:xxxx`
 - 只读界面（只能看）：`http://你的服务器IP:3000`
 
 把可写地址发给需要操作的人，只读地址发给只需要查看的人。
