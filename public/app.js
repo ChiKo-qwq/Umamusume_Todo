@@ -2,7 +2,6 @@
   const listEl = document.getElementById('list');
   const emptyEl = document.getElementById('empty');
   const searchEl = document.getElementById('search');
-  const resetBtn = document.getElementById('reset');
   const doneCountEl = document.getElementById('done-count');
   const doingCountEl = document.getElementById('doing-count');
   const totalEl = document.getElementById('total');
@@ -126,16 +125,6 @@
   searchEl.addEventListener('input', () => {
     state.search = searchEl.value.trim();
     render();
-  });
-
-  resetBtn.addEventListener('click', async () => {
-    if (!confirm('确定要清除所有状态吗？')) return;
-    try {
-      await fetch('/api/reset', { method: 'POST' });
-      await load();
-    } catch (e) {
-      syncStatusEl.textContent = '重置失败，请重试';
-    }
   });
 
   load();
