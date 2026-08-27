@@ -4,12 +4,16 @@
   const searchEl = document.getElementById('search');
   const resetBtn = document.getElementById('reset');
   const doneCountEl = document.getElementById('done-count');
+  const doingCountEl = document.getElementById('doing-count');
   const totalEl = document.getElementById('total');
   const total2El = document.getElementById('total2');
   const progressBarEl = document.getElementById('progress-bar');
   const syncStatusEl = document.getElementById('sync-status');
 
   const state = { items: [], version: -1, search: '' };
+
+  const NEXT = { none: 'doing', doing: 'done', done: 'none' };
+  const LABEL = { none: '未开始', doing: '制作中', done: '已完成' };
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({
@@ -26,10 +30,12 @@
 
   function updateStats() {
     const total = state.items.length;
-    const done = state.items.filter((it) => it.done).length;
+    const done = state.items.filter((it) => it.status === 'done').length;
+    const doing = state.items.filter((it) => it.status === 'doing').length;
     totalEl.textContent = total;
     total2El.textContent = total;
     doneCountEl.textContent = done;
+    doingCountEl.textContent = doing;
     const pct = total ? Math.round((done / total) * 100) : 0;
     progressBarEl.style.width = pct + '%';
   }
@@ -37,27 +43,30 @@
   function render() {
     const filtered = state.items.filter(matches);
     listEl.innerHTML = filtered.map((it) => `
-      <li class="item${it.done ? ' done' : ''}" data-id="${escapeHtml(it.id)}">
-        <label class="card">
-          <input type="checkbox" class="check" data-id="${escapeHtml(it.id)}" ${it.done ? 'checked' : ''} />
+      <li class="item st-${it.status}" data-id="${escapeHtml(it.id)}">
+        <div class="card" data-id="${escapeHtml(it.id)}" title="点击切换状态">
+          <span class="status st-${it.status}">${LABEL[it.status]}</span>
           <span class="names">
             <span class="primary">${escapeHtml(it.chineseSimplified)}</span>
             <span class="secondary">${escapeHtml(it.english)} · ${escapeHtml(it.japanese)} · ${escapeHtml(it.chineseTraditional)}</span>
           </span>
-        </label>
+        </div>
       </li>`).join('');
     emptyEl.hidden = filtered.length !== 0;
     updateStats();
   }
 
-  // 只更新已渲染的 checkbox，避免整页重建导致交互中断
+  // 只更新已渲染的状态标签，避免整页重建导致交互中断
   function updateChecks() {
     for (const it of state.items) {
       const li = listEl.querySelector(`li[data-id="${CSS.escape(it.id)}"]`);
       if (!li) continue;
-      li.classList.toggle('done', it.done);
-      const cb = li.querySelector('.check');
-      if (cb) cb.checked = it.done;
+      li.className = `item st-${it.status}`;
+      const badge = li.querySelector('.status');
+      if (badge) {
+        badge.className = `status st-${it.status}`;
+        badge.textContent = LABEL[it.status];
+      }
     }
     updateStats();
   }
@@ -85,23 +94,33 @@
     }
   }
 
-  listEl.addEventListener('change', (e) => {
-    const cb = e.target.closest('.check');
-    if (!cb) return;
-    const id = cb.dataset.id;
-    const done = cb.checked;
-    // 乐观更新
+  function cycle(id) {
     const it = state.items.find((x) => x.id === id);
-    if (it) it.done = done;
-    const li = cb.closest('.item');
-    if (li) li.classList.toggle('done', done);
+    if (!it) return;
+    const next = NEXT[it.status] || 'doing';
+    it.status = next;
+
+    const li = listEl.querySelector(`li[data-id="${CSS.escape(id)}"]`);
+    if (li) {
+      li.className = `item st-${next}`;
+      const badge = li.querySelector('.status');
+      if (badge) {
+        badge.className = `status st-${next}`;
+        badge.textContent = LABEL[next];
+      }
+    }
     updateStats();
-    // 持久化
+
     fetch(`/api/items/${encodeURIComponent(id)}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ done }),
+      body: JSON.stringify({ status: next }),
     }).catch(() => { syncStatusEl.textContent = '保存失败，稍后自动重试'; });
+  }
+
+  listEl.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if (card) cycle(card.dataset.id);
   });
 
   searchEl.addEventListener('input', () => {
@@ -110,7 +129,7 @@
   });
 
   resetBtn.addEventListener('click', async () => {
-    if (!confirm('确定要清除所有勾选状态吗？')) return;
+    if (!confirm('确定要清除所有状态吗？')) return;
     try {
       await fetch('/api/reset', { method: 'POST' });
       await load();

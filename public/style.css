@@ -134,14 +134,28 @@ main { padding-top: 20px; padding-bottom: 40px; }
 
 .card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); border-color: #d8d3cf; }
 
-.check {
+.card.readonly { cursor: default; }
+.card.readonly:hover { box-shadow: none; border-color: var(--border); }
+
+/* 状态标签 */
+.status {
   flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
-  margin-top: 2px;
-  accent-color: var(--done);
-  cursor: pointer;
+  min-width: 54px;
+  padding: 2px 8px;
+  margin-top: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
 }
+
+.st-none { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+.st-doing { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+.st-done { background: var(--done-soft); color: var(--done); border-color: #bbf7d0; }
 
 .names { display: flex; flex-direction: column; min-width: 0; }
 
@@ -159,15 +173,24 @@ main { padding-top: 20px; padding-bottom: 40px; }
   word-break: break-all;
 }
 
-.item.done .card {
+.item.st-done .card {
   background: var(--done-soft);
   border-color: #bbf7d0;
 }
 
-.item.done .primary {
+.item.st-doing .card {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.item.st-done .primary {
   color: var(--done);
   text-decoration: line-through;
   text-decoration-color: rgba(22, 163, 74, 0.5);
+}
+
+.item.st-doing .primary {
+  color: #b45309;
 }
 
 /* ---------- 空状态 / 页脚 ---------- */

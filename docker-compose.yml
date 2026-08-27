@@ -3,6 +3,7 @@ services:
     build: .
     container_name: umamusume-todolist
     ports:
+      - "2012:2012"
       - "3000:3000"
     volumes:
       - ./data:/app/data

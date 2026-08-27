@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>赛马娘 共享清单 · 只读</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <h1>赛马娘共享清单 · 只读</h1>
+        <p class="subtitle">Umamusume Shared Checklist · 共 <span id="total">145</span> 项</p>
+      </div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="搜索名称 / 日文 / 英文…" autocomplete="off" />
+      </div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="container progress-text">
+      <span id="done-count">0</span> 已完成 ·
+      <span id="doing-count">0</span> 制作中 ·
+      共 <span id="total2">145</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <ul id="list" class="list"></ul>
+    <p id="empty" class="empty" hidden>没有匹配的结果</p>
+  </main>
+
+  <footer class="footer container">
+    只读视图 · <span id="sync-status">加载中…</span>
+  </footer>
+
+  <script src="readonly.js"></script>
+</body>
+</html>

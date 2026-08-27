@@ -1,16 +1,26 @@
 # 赛马娘 共享清单（Umamusume Shared Todo List）
-原用途为记录社团制品
+
 一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`），
-任何打开网页的人都能查看并勾选同一份清单，进度实时同步，无需登录。
+任何打开网页的人都能查看并更新同一份清单，进度实时同步，无需登录。
 
 ## 功能
 
 - 每个角色一条 todo，显示：简体中文名 + 英文名 + 日文名 + 繁体中文名
-- 勾选「已完成」，进度条显示 `X / 145`
+- 三态进度：点击卡片循环切换「未开始 → 制作中 → 已完成」
 - 搜索过滤（支持中文 / 日文 / 英文）
 - 多人共享同一份清单，2 秒自动同步
-- 「重置」按钮清除所有勾选
+- 「重置」按钮清除所有状态
 - 每天 0 点自动重新抓取数据源，更新清单
+- 双端口：**可写界面**（能勾选）+ **只读界面**（只能看）
+
+## 双端口说明
+
+| 端口 | 类型 | 说明 |
+| --- | --- | --- |
+| `2012` | 可写 | 可以切换状态、重置 |
+| `3000` | 只读 | 只能查看，无法修改（适合投屏/分享给只看的人） |
+
+两个端口共享同一份数据和勾选状态，只读页会自动实时刷新。
 
 ## 每日自动刷新
 
@@ -27,6 +37,8 @@
 
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
+| `PORT` | `2012` | 可写界面端口 |
+| `READONLY_PORT` | `3000` | 只读界面端口 |
 | `REFRESH_HOUR` | `0` | 每天刷新的小时（0-23） |
 | `REFRESH_MINUTE` | `0` | 每天刷新的分钟（0-59） |
 | `REFRESH_TOKEN` | 空 | 设置后，手动刷新接口需要携带此 token |
@@ -35,25 +47,27 @@
 手动触发刷新（可选，`REFRESH_TOKEN` 设置了则需带上）：
 
 ```bash
-curl -X POST http://localhost:3000/api/refresh
+curl -X POST http://localhost:2012/api/refresh
 # 带 token：
-curl -X POST http://localhost:3000/api/refresh -H "Authorization: Bearer 你的token"
+curl -X POST http://localhost:2012/api/refresh -H "Authorization: Bearer 你的token"
 ```
 
 ## 目录结构
 
 ```
 todo-app/
-├── server.js            # Express 后端 + 每日定时刷新
+├── server.js            # Express 后端 + 每日定时刷新 + 双端口
 ├── scraper.js           # 抓取逻辑（umamusu.wiki + biligame）
 ├── package.json
 ├── characters.json      # 角色数据（由抓取生成）
 ├── umamusume_characters.csv  # CSV（由抓取生成）
 ├── data/state.json      # 勾选状态（自动生成，持久化）
 └── public/
-    ├── index.html
-    ├── style.css
-    └── app.js
+    ├── index.html       # 可写界面
+    ├── readonly.html    # 只读界面
+    ├── app.js
+    ├── readonly.js
+    └── style.css
 ```
 
 ## 部署方式（任选其一）
@@ -65,7 +79,7 @@ todo-app/
 ```bash
 cd todo-app
 npm install
-npm start          # 默认监听 3000 端口
+npm start          # 可写界面 2012，只读界面 3000
 ```
 
 生产环境建议用进程守护工具，例如 pm2：
@@ -80,7 +94,7 @@ pm2 startup
 自定义端口：
 
 ```bash
-PORT=8080 npm start
+PORT=8080 READONLY_PORT=8081 npm start
 ```
 
 ### 方式 B：Docker（推荐，最省心）
@@ -96,7 +110,7 @@ docker compose up -d --build
 
 ### 方式 C：Nginx 反向代理（可选，绑定域名 + HTTPS）
 
-把 3000 端口反代到你的域名：
+把 2012（可写）端口反代到你的域名：
 
 ```nginx
 server {
@@ -104,7 +118,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:2012;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -116,8 +130,12 @@ server {
 
 ## 如何共享给别人
 
-部署完成后，把服务器的公网地址（IP 或域名 + 端口）发给对方即可，
-例如 `http://你的服务器IP:3000`。所有打开该地址的人操作的是同一份清单。
+部署完成后有两个地址：
+
+- 可写界面（能勾选）：`http://你的服务器IP:2012`
+- 只读界面（只能看）：`http://你的服务器IP:3000`
+
+把可写地址发给需要操作的人，只读地址发给只需要查看的人。
 
 ## 自定义角色数据
 
