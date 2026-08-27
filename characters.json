@@ -1,0 +1,1017 @@
+[
+  {
+    "id": "admire_groove",
+    "english": "Admire Groove",
+    "japanese": "アドマイヤグルーヴ",
+    "chineseTraditional": "愛慕律動",
+    "chineseSimplified": "爱慕律动"
+  },
+  {
+    "id": "admire_vega",
+    "english": "Admire Vega",
+    "japanese": "アドマイヤベガ",
+    "chineseTraditional": "愛慕織姬",
+    "chineseSimplified": "爱慕织姬"
+  },
+  {
+    "id": "agnes_digital",
+    "english": "Agnes Digital",
+    "japanese": "アグネスデジタル",
+    "chineseTraditional": "愛麗數碼",
+    "chineseSimplified": "爱丽数码"
+  },
+  {
+    "id": "agnes_tachyon",
+    "english": "Agnes Tachyon",
+    "japanese": "アグネスタキオン",
+    "chineseTraditional": "愛麗速子",
+    "chineseSimplified": "爱丽速子"
+  },
+  {
+    "id": "air_groove",
+    "english": "Air Groove",
+    "japanese": "エアグルーヴ",
+    "chineseTraditional": "氣槽",
+    "chineseSimplified": "气槽"
+  },
+  {
+    "id": "air_messiah",
+    "english": "Air Messiah",
+    "japanese": "エアメサイア",
+    "chineseTraditional": "空中彌賽亞",
+    "chineseSimplified": "空中救世主"
+  },
+  {
+    "id": "air_shakur",
+    "english": "Air Shakur",
+    "japanese": "エアシャカール",
+    "chineseTraditional": "空中神宮",
+    "chineseSimplified": "空中神宫"
+  },
+  {
+    "id": "almond_eye",
+    "english": "Almond Eye",
+    "japanese": "アーモンドアイ",
+    "chineseTraditional": "杏目",
+    "chineseSimplified": "杏目"
+  },
+  {
+    "id": "aston_machan",
+    "english": "Aston Machan",
+    "japanese": "アストンマーチャン",
+    "chineseTraditional": "奧斯頓真弓",
+    "chineseSimplified": "真弓快车"
+  },
+  {
+    "id": "bamboo_memory",
+    "english": "Bamboo Memory",
+    "japanese": "バンブーメモリー",
+    "chineseTraditional": "青竹回憶",
+    "chineseSimplified": "青竹回忆"
+  },
+  {
+    "id": "believe",
+    "english": "Believe",
+    "japanese": "ビリーヴ",
+    "chineseTraditional": "信念",
+    "chineseSimplified": "信念"
+  },
+  {
+    "id": "biko_pegasus",
+    "english": "Biko Pegasus",
+    "japanese": "ビコーペガサス",
+    "chineseTraditional": "微光飛駒",
+    "chineseSimplified": "微光飞驹"
+  },
+  {
+    "id": "biwa_hayahide",
+    "english": "Biwa Hayahide",
+    "japanese": "ビワハヤヒデ",
+    "chineseTraditional": "琵琶晨光",
+    "chineseSimplified": "琵琶晨光"
+  },
+  {
+    "id": "blast_onepiece",
+    "english": "Blast Onepiece",
+    "japanese": "ブラストワンピース",
+    "chineseTraditional": "疾風裝束",
+    "chineseSimplified": "疾風裝束（繁）"
+  },
+  {
+    "id": "bubble_gum_fellow",
+    "english": "Bubble Gum Fellow",
+    "japanese": "バブルガムフェロー",
+    "chineseTraditional": "泡泡糖小子",
+    "chineseSimplified": "吹波糖"
+  },
+  {
+    "id": "buena_vista",
+    "english": "Buena Vista",
+    "japanese": "ブエナビスタ",
+    "chineseTraditional": "迷人景緻",
+    "chineseSimplified": "迷人景致"
+  },
+  {
+    "id": "calstone_light_o",
+    "english": "Calstone Light O",
+    "japanese": "カルストンライトオ",
+    "chineseTraditional": "浮岩光王",
+    "chineseSimplified": "金镇之光"
+  },
+  {
+    "id": "cesario",
+    "english": "Cesario",
+    "japanese": "シーザリオ",
+    "chineseTraditional": "西薩里奧",
+    "chineseSimplified": "西沙里奥"
+  },
+  {
+    "id": "cheval_grand",
+    "english": "Cheval Grand",
+    "japanese": "シュヴァルグラン",
+    "chineseTraditional": "高尚駿逸",
+    "chineseSimplified": "高尚骏逸"
+  },
+  {
+    "id": "chrono_genesis",
+    "english": "Chrono Genesis",
+    "japanese": "クロノジェネシス",
+    "chineseTraditional": "時代創世",
+    "chineseSimplified": "创世驹"
+  },
+  {
+    "id": "copano_rickey",
+    "english": "Copano Rickey",
+    "japanese": "コパノリッキー",
+    "chineseTraditional": "小林歷奇",
+    "chineseSimplified": "小林历奇"
+  },
+  {
+    "id": "curren_bouquetd_or",
+    "english": "Curren Bouquetd'or",
+    "japanese": "カレンブーケドール",
+    "chineseTraditional": "機伶金花",
+    "chineseSimplified": "机伶金花"
+  },
+  {
+    "id": "curren_chan",
+    "english": "Curren Chan",
+    "japanese": "カレンチャン",
+    "chineseTraditional": "真機伶",
+    "chineseSimplified": "真机伶"
+  },
+  {
+    "id": "daiichi_ruby",
+    "english": "Daiichi Ruby",
+    "japanese": "ダイイチルビー",
+    "chineseTraditional": "第一紅寶",
+    "chineseSimplified": "第一红宝石"
+  },
+  {
+    "id": "daitaku_helios",
+    "english": "Daitaku Helios",
+    "japanese": "ダイタクヘリオス",
+    "chineseTraditional": "大德太陽",
+    "chineseSimplified": "大拓太阳神"
+  },
+  {
+    "id": "daiwa_scarlet",
+    "english": "Daiwa Scarlet",
+    "japanese": "ダイワスカーレット",
+    "chineseTraditional": "大和赤驥",
+    "chineseSimplified": "大和赤骥"
+  },
+  {
+    "id": "dantsu_flame",
+    "english": "Dantsu Flame",
+    "japanese": "ダンツフレーム",
+    "chineseTraditional": "緞通烈焰",
+    "chineseSimplified": "烈焰快驹"
+  },
+  {
+    "id": "daring_heart",
+    "english": "Daring Heart",
+    "japanese": "デアリングハート",
+    "chineseTraditional": "勇敢之心",
+    "chineseSimplified": "勇敢之心"
+  },
+  {
+    "id": "daring_tact",
+    "english": "Daring Tact",
+    "japanese": "デアリングタクト",
+    "chineseTraditional": "謀勇兼備",
+    "chineseSimplified": "謀勇兼備（繁）"
+  },
+  {
+    "id": "dream_journey",
+    "english": "Dream Journey",
+    "japanese": "ドリームジャーニー",
+    "chineseTraditional": "夢之旅",
+    "chineseSimplified": "梦之旅"
+  },
+  {
+    "id": "duramente",
+    "english": "Duramente",
+    "japanese": "ドゥラメンテ",
+    "chineseTraditional": "大鳴大放",
+    "chineseSimplified": "大鸣大放"
+  },
+  {
+    "id": "durandal",
+    "english": "Durandal",
+    "japanese": "デュランダル",
+    "chineseTraditional": "杜蘭達爾",
+    "chineseSimplified": "多旺达"
+  },
+  {
+    "id": "efforia",
+    "english": "Efforia",
+    "japanese": "エフフォーリア",
+    "chineseTraditional": "樂透心",
+    "chineseSimplified": "樂透心（繁）"
+  },
+  {
+    "id": "eishin_flash",
+    "english": "Eishin Flash",
+    "japanese": "エイシンフラッシュ",
+    "chineseTraditional": "榮進閃耀",
+    "chineseSimplified": "荣进闪耀"
+  },
+  {
+    "id": "el_condor_pasa",
+    "english": "El Condor Pasa",
+    "japanese": "エルコンドルパサー",
+    "chineseTraditional": "神鷹",
+    "chineseSimplified": "神鹰"
+  },
+  {
+    "id": "epiphaneia",
+    "english": "Epiphaneia",
+    "japanese": "エピファネイア",
+    "chineseTraditional": "神威啟示",
+    "chineseSimplified": "神威啟示（繁）"
+  },
+  {
+    "id": "espoir_city",
+    "english": "Espoir City",
+    "japanese": "エスポワールシチー",
+    "chineseTraditional": "希望城市",
+    "chineseSimplified": "希望之城"
+  },
+  {
+    "id": "fenomeno",
+    "english": "Fenomeno",
+    "japanese": "フェノーメノ",
+    "chineseTraditional": "超常駿驥",
+    "chineseSimplified": "超常骏骥"
+  },
+  {
+    "id": "fine_motion",
+    "english": "Fine Motion",
+    "japanese": "ファインモーション",
+    "chineseTraditional": "美妙姿勢",
+    "chineseSimplified": "美妙姿势"
+  },
+  {
+    "id": "forever_young",
+    "english": "Forever Young",
+    "japanese": "フォーエバーヤング",
+    "chineseTraditional": "青春永駐",
+    "chineseSimplified": "青春永駐（繁）"
+  },
+  {
+    "id": "fuji_kiseki",
+    "english": "Fuji Kiseki",
+    "japanese": "フジキセキ",
+    "chineseTraditional": "富士奇石",
+    "chineseSimplified": "富士奇迹"
+  },
+  {
+    "id": "furioso",
+    "english": "Furioso",
+    "japanese": "フリオーソ",
+    "chineseTraditional": "狂熱激昂",
+    "chineseSimplified": "狂怒乐章"
+  },
+  {
+    "id": "fusaichi_pandora",
+    "english": "Fusaichi Pandora",
+    "japanese": "フサイチパンドラ",
+    "chineseTraditional": "房一潘多拉",
+    "chineseSimplified": "房一潘多拉"
+  },
+  {
+    "id": "gentildonna",
+    "english": "Gentildonna",
+    "japanese": "ジェンティルドンナ",
+    "chineseTraditional": "貴婦人",
+    "chineseSimplified": "贵妇人"
+  },
+  {
+    "id": "genuine",
+    "english": "Genuine",
+    "japanese": "ジェニュイン",
+    "chineseTraditional": "真誠",
+    "chineseSimplified": "真誠（繁）"
+  },
+  {
+    "id": "gold_city",
+    "english": "Gold City",
+    "japanese": "ゴールドシチー",
+    "chineseTraditional": "黃金城 / 黃金城市",
+    "chineseSimplified": "黄金城"
+  },
+  {
+    "id": "gold_ship",
+    "english": "Gold Ship",
+    "japanese": "ゴールドシップ",
+    "chineseTraditional": "黃金船",
+    "chineseSimplified": "黄金船"
+  },
+  {
+    "id": "gran_alegria",
+    "english": "Gran Alegria",
+    "japanese": "グランアレグリア",
+    "chineseTraditional": "放聲歡呼",
+    "chineseSimplified": "放声欢呼"
+  },
+  {
+    "id": "grass_wonder",
+    "english": "Grass Wonder",
+    "japanese": "グラスワンダー",
+    "chineseTraditional": "草上飛",
+    "chineseSimplified": "草上飞"
+  },
+  {
+    "id": "haru_urara",
+    "english": "Haru Urara",
+    "japanese": "ハルウララ",
+    "chineseTraditional": "春麗 / 春烏菈菈",
+    "chineseSimplified": "春乌拉拉"
+  },
+  {
+    "id": "hishi_akebono",
+    "english": "Hishi Akebono",
+    "japanese": "ヒシアケボノ",
+    "chineseTraditional": "菱曙",
+    "chineseSimplified": "菱曙"
+  },
+  {
+    "id": "hishi_amazon",
+    "english": "Hishi Amazon",
+    "japanese": "ヒシアマゾン",
+    "chineseTraditional": "菱亞馬遜",
+    "chineseSimplified": "菱亚马逊"
+  },
+  {
+    "id": "hishi_miracle",
+    "english": "Hishi Miracle",
+    "japanese": "ヒシミラクル",
+    "chineseTraditional": "菱奇蹟",
+    "chineseSimplified": "菱钻奇宝"
+  },
+  {
+    "id": "hokko_tarumae",
+    "english": "Hokko Tarumae",
+    "japanese": "ホッコータルマエ",
+    "chineseTraditional": "北幸樽前",
+    "chineseSimplified": "北港火山"
+  },
+  {
+    "id": "ikuno_dictus",
+    "english": "Ikuno Dictus",
+    "japanese": "イクノディクタス",
+    "chineseTraditional": "生野狄杜斯",
+    "chineseSimplified": "生野狄杜斯"
+  },
+  {
+    "id": "inari_one",
+    "english": "Inari One",
+    "japanese": "イナリワン",
+    "chineseTraditional": "稻荷一",
+    "chineseSimplified": "稻荷一"
+  },
+  {
+    "id": "ines_fujin",
+    "english": "Ines Fujin",
+    "japanese": "アイネスフウジン",
+    "chineseTraditional": "艾尼斯風神 / 艾尼風神",
+    "chineseSimplified": "艾尼斯风神"
+  },
+  {
+    "id": "jungle_pocket",
+    "english": "Jungle Pocket",
+    "japanese": "ジャングルポケット",
+    "chineseTraditional": "叢林口袋",
+    "chineseSimplified": "森林宝穴"
+  },
+  {
+    "id": "k_s_miracle",
+    "english": "K.S.Miracle",
+    "japanese": "ケイエスミラクル",
+    "chineseTraditional": "凱斯奇蹟 / 喜嘉奇蹟",
+    "chineseSimplified": "凯斯奇迹"
+  },
+  {
+    "id": "katsuragi_ace",
+    "english": "Katsuragi Ace",
+    "japanese": "カツラギエース",
+    "chineseTraditional": "葛城榮主",
+    "chineseSimplified": "葛城王牌"
+  },
+  {
+    "id": "kawakami_princess",
+    "english": "Kawakami Princess",
+    "japanese": "カワカミプリンセス",
+    "chineseTraditional": "川上公主",
+    "chineseSimplified": "川上公主"
+  },
+  {
+    "id": "king_halo",
+    "english": "King Halo",
+    "japanese": "キングヘイロー",
+    "chineseTraditional": "帝皇光輝",
+    "chineseSimplified": "帝王光辉"
+  },
+  {
+    "id": "kiseki",
+    "english": "Kiseki",
+    "japanese": "キセキ",
+    "chineseTraditional": "神業",
+    "chineseSimplified": "神業（繁）"
+  },
+  {
+    "id": "kitasan_black",
+    "english": "Kitasan Black",
+    "japanese": "キタサンブラック",
+    "chineseTraditional": "北部玄駒",
+    "chineseSimplified": "北部玄驹"
+  },
+  {
+    "id": "logotype",
+    "english": "Logotype",
+    "japanese": "ロゴタイプ",
+    "chineseTraditional": "標誌名駒",
+    "chineseSimplified": "標誌名駒（繁）"
+  },
+  {
+    "id": "loves_only_you",
+    "english": "Loves Only You",
+    "japanese": "ラヴズオンリーユー",
+    "chineseTraditional": "唯獨愛你",
+    "chineseSimplified": "唯独爱你"
+  },
+  {
+    "id": "lucky_lilac",
+    "english": "Lucky Lilac",
+    "japanese": "ラッキーライラック",
+    "chineseTraditional": "幸運歐丁香",
+    "chineseSimplified": "旺紫丁"
+  },
+  {
+    "id": "manhattan_cafe",
+    "english": "Manhattan Cafe",
+    "japanese": "マンハッタンカフェ",
+    "chineseTraditional": "曼哈頓咖啡",
+    "chineseSimplified": "曼城茶座"
+  },
+  {
+    "id": "marche_lorraine",
+    "english": "Marche Lorraine",
+    "japanese": "マルシュロレーヌ",
+    "chineseTraditional": "洛林軍歌",
+    "chineseSimplified": "洛林軍歌（繁）"
+  },
+  {
+    "id": "maruzensky",
+    "english": "Maruzensky",
+    "japanese": "マルゼンスキー",
+    "chineseTraditional": "丸善斯基",
+    "chineseSimplified": "丸善斯基"
+  },
+  {
+    "id": "marvelous_sunday",
+    "english": "Marvelous Sunday",
+    "japanese": "マーベラスサンデー",
+    "chineseTraditional": "美麗周日",
+    "chineseSimplified": "美丽周日"
+  },
+  {
+    "id": "matikanefukukitaru",
+    "english": "Matikanefukukitaru",
+    "japanese": "マチカネフクキタル",
+    "chineseTraditional": "待兼福來",
+    "chineseSimplified": "待兼福来"
+  },
+  {
+    "id": "matikanetannhauser",
+    "english": "Matikanetannhauser",
+    "japanese": "マチカネタンホイザ",
+    "chineseTraditional": "待兼唐懷瑟",
+    "chineseSimplified": "待兼诗歌剧"
+  },
+  {
+    "id": "mayano_top_gun",
+    "english": "Mayano Top Gun",
+    "japanese": "マヤノトップガン",
+    "chineseTraditional": "重砲",
+    "chineseSimplified": "摩耶重炮"
+  },
+  {
+    "id": "meisho_doto",
+    "english": "Meisho Doto",
+    "japanese": "メイショウドトウ",
+    "chineseTraditional": "名將怒濤",
+    "chineseSimplified": "名将怒涛"
+  },
+  {
+    "id": "mejiro_ardan",
+    "english": "Mejiro Ardan",
+    "japanese": "メジロアルダン",
+    "chineseTraditional": "目白阿爾丹",
+    "chineseSimplified": "目白阿尔丹"
+  },
+  {
+    "id": "mejiro_bright",
+    "english": "Mejiro Bright",
+    "japanese": "メジロブライト",
+    "chineseTraditional": "目白光明",
+    "chineseSimplified": "目白光明"
+  },
+  {
+    "id": "mejiro_dober",
+    "english": "Mejiro Dober",
+    "japanese": "メジロドーベル",
+    "chineseTraditional": "目白多伯",
+    "chineseSimplified": "目白多伯"
+  },
+  {
+    "id": "mejiro_mcqueen",
+    "english": "Mejiro McQueen",
+    "japanese": "メジロマックイーン",
+    "chineseTraditional": "目白麥昆",
+    "chineseSimplified": "目白麦昆"
+  },
+  {
+    "id": "mejiro_palmer",
+    "english": "Mejiro Palmer",
+    "japanese": "メジロパーマー",
+    "chineseTraditional": "目白善信",
+    "chineseSimplified": "目白善信"
+  },
+  {
+    "id": "mejiro_ramonu",
+    "english": "Mejiro Ramonu",
+    "japanese": "メジロラモーヌ",
+    "chineseTraditional": "目白拉茉奴",
+    "chineseSimplified": "目白高峰"
+  },
+  {
+    "id": "mejiro_ryan",
+    "english": "Mejiro Ryan",
+    "japanese": "メジロライアン",
+    "chineseTraditional": "目白雷恩",
+    "chineseSimplified": "目白赖恩"
+  },
+  {
+    "id": "mihono_bourbon",
+    "english": "Mihono Bourbon",
+    "japanese": "ミホノブルボン",
+    "chineseTraditional": "美浦波旁",
+    "chineseSimplified": "美浦波旁"
+  },
+  {
+    "id": "mr_c_b",
+    "english": "Mr. C.B.",
+    "japanese": "ミスターシービー",
+    "chineseTraditional": "千明代表",
+    "chineseSimplified": "千明代表"
+  },
+  {
+    "id": "nakayama_festa",
+    "english": "Nakayama Festa",
+    "japanese": "ナカヤマフェスタ",
+    "chineseTraditional": "中山慶典",
+    "chineseSimplified": "中山庆典"
+  },
+  {
+    "id": "narita_brian",
+    "english": "Narita Brian",
+    "japanese": "ナリタブライアン",
+    "chineseTraditional": "成田白仁",
+    "chineseSimplified": "成田白仁"
+  },
+  {
+    "id": "narita_taishin",
+    "english": "Narita Taishin",
+    "japanese": "ナリタタイシン",
+    "chineseTraditional": "成田大進",
+    "chineseSimplified": "成田大进"
+  },
+  {
+    "id": "narita_top_road",
+    "english": "Narita Top Road",
+    "japanese": "ナリタトップロード",
+    "chineseTraditional": "成田路",
+    "chineseSimplified": "成田路"
+  },
+  {
+    "id": "neo_universe",
+    "english": "Neo Universe",
+    "japanese": "ネオユニヴァース",
+    "chineseTraditional": "新宇宙",
+    "chineseSimplified": "新宇宙"
+  },
+  {
+    "id": "nice_nature",
+    "english": "Nice Nature",
+    "japanese": "ナイスネイチャ",
+    "chineseTraditional": "優秀素質",
+    "chineseSimplified": "优秀素质"
+  },
+  {
+    "id": "nishino_flower",
+    "english": "Nishino Flower",
+    "japanese": "ニシノフラワー",
+    "chineseTraditional": "西野花",
+    "chineseSimplified": "西野花"
+  },
+  {
+    "id": "no_reason",
+    "english": "No Reason",
+    "japanese": "ノーリーズン",
+    "chineseTraditional": "無需理由",
+    "chineseSimplified": "莫名其妙"
+  },
+  {
+    "id": "north_flight",
+    "english": "North Flight",
+    "japanese": "ノースフライト",
+    "chineseTraditional": "北方飛翔",
+    "chineseSimplified": "北方飞翔"
+  },
+  {
+    "id": "oguri_cap",
+    "english": "Oguri Cap",
+    "japanese": "オグリキャップ",
+    "chineseTraditional": "小栗帽",
+    "chineseSimplified": "小栗帽"
+  },
+  {
+    "id": "orfevre",
+    "english": "Orfevre",
+    "japanese": "オルフェーヴル",
+    "chineseTraditional": "黃金巨匠",
+    "chineseSimplified": "黄金巨匠"
+  },
+  {
+    "id": "phalaenopsis",
+    "english": "Phalaenopsis",
+    "japanese": "ファレノプシス",
+    "chineseTraditional": "菲莉斯",
+    "chineseSimplified": "菲莉斯（繁）"
+  },
+  {
+    "id": "red_desire",
+    "english": "Red Desire",
+    "japanese": "レッドディザイア",
+    "chineseTraditional": "紅色夢想",
+    "chineseSimplified": "红色梦想"
+  },
+  {
+    "id": "rhein_kraft",
+    "english": "Rhein Kraft",
+    "japanese": "ラインクラフト",
+    "chineseTraditional": "萊茵實力",
+    "chineseSimplified": "莱茵力量"
+  },
+  {
+    "id": "rice_shower",
+    "english": "Rice Shower",
+    "japanese": "ライスシャワー",
+    "chineseTraditional": "米浴",
+    "chineseSimplified": "米浴"
+  },
+  {
+    "id": "rose_kingdom",
+    "english": "Rose Kingdom",
+    "japanese": "ローズキングダム",
+    "chineseTraditional": "玫瑰帝國",
+    "chineseSimplified": "玫瑰帝國（繁）"
+  },
+  {
+    "id": "royce_and_royce",
+    "english": "Royce and Royce",
+    "japanese": "ロイスアンドロイス",
+    "chineseTraditional": "萊斯萊斯",
+    "chineseSimplified": "萊斯萊斯（繁）"
+  },
+  {
+    "id": "rulership",
+    "english": "Rulership",
+    "japanese": "ルーラーシップ",
+    "chineseTraditional": "統治地位",
+    "chineseSimplified": "统治地位"
+  },
+  {
+    "id": "sakura_bakushin_o",
+    "english": "Sakura Bakushin O",
+    "japanese": "サクラバクシンオー",
+    "chineseTraditional": "櫻花驀進王",
+    "chineseSimplified": "樱花进王"
+  },
+  {
+    "id": "sakura_chitose_o",
+    "english": "Sakura Chitose O",
+    "japanese": "サクラチトセオー",
+    "chineseTraditional": "櫻花千歲王",
+    "chineseSimplified": "櫻花千歲王（繁）"
+  },
+  {
+    "id": "sakura_chiyono_o",
+    "english": "Sakura Chiyono O",
+    "japanese": "サクラチヨノオー",
+    "chineseTraditional": "櫻花千代王",
+    "chineseSimplified": "樱花千代王"
+  },
+  {
+    "id": "sakura_laurel",
+    "english": "Sakura Laurel",
+    "japanese": "サクラローレル",
+    "chineseTraditional": "櫻花桂冠",
+    "chineseSimplified": "樱花桂冠"
+  },
+  {
+    "id": "samson_big",
+    "english": "Samson Big",
+    "japanese": "サムソンビッグ",
+    "chineseTraditional": "參孫大",
+    "chineseSimplified": "參孫大（繁）"
+  },
+  {
+    "id": "satono_crown",
+    "english": "Satono Crown",
+    "japanese": "サトノクラウン",
+    "chineseTraditional": "里見皇冠",
+    "chineseSimplified": "里见皇冠"
+  },
+  {
+    "id": "satono_diamond",
+    "english": "Satono Diamond",
+    "japanese": "サトノダイヤモンド",
+    "chineseTraditional": "里見光鑽",
+    "chineseSimplified": "里见光钻"
+  },
+  {
+    "id": "seeking_the_pearl",
+    "english": "Seeking the Pearl",
+    "japanese": "シーキングザパール",
+    "chineseTraditional": "採珠",
+    "chineseSimplified": "采珠"
+  },
+  {
+    "id": "seiun_sky",
+    "english": "Seiun Sky",
+    "japanese": "セイウンスカイ",
+    "chineseTraditional": "星雲天空 (original translation) 青雲天空 (current translation)",
+    "chineseSimplified": "青云天空"
+  },
+  {
+    "id": "shinko_windy",
+    "english": "Shinko Windy",
+    "japanese": "シンコウウインディ",
+    "chineseTraditional": "新光風",
+    "chineseSimplified": "新光风"
+  },
+  {
+    "id": "silence_suzuka",
+    "english": "Silence Suzuka",
+    "japanese": "サイレンススズカ",
+    "chineseTraditional": "無聲鈴鹿",
+    "chineseSimplified": "无声铃鹿"
+  },
+  {
+    "id": "sirius_symboli",
+    "english": "Sirius Symboli",
+    "japanese": "シリウスシンボリ",
+    "chineseTraditional": "天狼星象徵",
+    "chineseSimplified": "天狼星象征"
+  },
+  {
+    "id": "smart_falcon",
+    "english": "Smart Falcon",
+    "japanese": "スマートファルコン",
+    "chineseTraditional": "醒目飛鷹",
+    "chineseSimplified": "醒目飞鹰"
+  },
+  {
+    "id": "sounds_of_earth",
+    "english": "Sounds of Earth",
+    "japanese": "サウンズオブアース",
+    "chineseTraditional": "萬籟爭鳴",
+    "chineseSimplified": "万籁争鸣"
+  },
+  {
+    "id": "special_week",
+    "english": "Special Week",
+    "japanese": "スペシャルウィーク",
+    "chineseTraditional": "特別週",
+    "chineseSimplified": "特别周"
+  },
+  {
+    "id": "stay_gold",
+    "english": "Stay Gold",
+    "japanese": "ステイゴールド",
+    "chineseTraditional": "黃金旅程",
+    "chineseSimplified": "黄金旅程"
+  },
+  {
+    "id": "still_in_love",
+    "english": "Still in Love",
+    "japanese": "スティルインラブ",
+    "chineseTraditional": "愛如往昔",
+    "chineseSimplified": "爱如往昔"
+  },
+  {
+    "id": "super_creek",
+    "english": "Super Creek",
+    "japanese": "スーパークリーク",
+    "chineseTraditional": "超級小海灣 / 超級小溪",
+    "chineseSimplified": "超级小海湾"
+  },
+  {
+    "id": "sweep_tosho",
+    "english": "Sweep Tosho",
+    "japanese": "スイープトウショウ",
+    "chineseTraditional": "東商變革",
+    "chineseSimplified": "东商变革"
+  },
+  {
+    "id": "symboli_kris_s",
+    "english": "Symboli Kris S",
+    "japanese": "シンボリクリスエス",
+    "chineseTraditional": "克莉斯耶絲象徵",
+    "chineseSimplified": "吉兆"
+  },
+  {
+    "id": "symboli_rudolf",
+    "english": "Symboli Rudolf",
+    "japanese": "シンボリルドルフ",
+    "chineseTraditional": "魯道夫象徵",
+    "chineseSimplified": "鲁道夫象征"
+  },
+  {
+    "id": "t_m_opera_o",
+    "english": "T.M. Opera O",
+    "japanese": "テイエムオペラオー",
+    "chineseTraditional": "好歌劇",
+    "chineseSimplified": "好歌剧"
+  },
+  {
+    "id": "taiki_shuttle",
+    "english": "Taiki Shuttle",
+    "japanese": "タイキシャトル",
+    "chineseTraditional": "大樹快車",
+    "chineseSimplified": "大树快车"
+  },
+  {
+    "id": "tamamo_cross",
+    "english": "Tamamo Cross",
+    "japanese": "タマモクロス",
+    "chineseTraditional": "玉藻十字",
+    "chineseSimplified": "玉藻十字"
+  },
+  {
+    "id": "tanino_gimlet",
+    "english": "Tanino Gimlet",
+    "japanese": "タニノギムレット",
+    "chineseTraditional": "谷水琴蕾",
+    "chineseSimplified": "谷水琴蕾"
+  },
+  {
+    "id": "tap_dance_city",
+    "english": "Tap Dance City",
+    "japanese": "タップダンスシチー",
+    "chineseTraditional": "踢踏城市",
+    "chineseSimplified": "跳舞城"
+  },
+  {
+    "id": "titleholder",
+    "english": "Titleholder",
+    "japanese": "タイトルホルダー",
+    "chineseTraditional": "領銜",
+    "chineseSimplified": "領銜（繁）"
+  },
+  {
+    "id": "tokai_teio",
+    "english": "Tokai Teio",
+    "japanese": "トウカイテイオー",
+    "chineseTraditional": "東海帝皇",
+    "chineseSimplified": "东海帝皇"
+  },
+  {
+    "id": "tosen_jordan",
+    "english": "Tosen Jordan",
+    "japanese": "トーセンジョーダン",
+    "chineseTraditional": "島川喬登",
+    "chineseSimplified": "东瀛佐敦"
+  },
+  {
+    "id": "transcend",
+    "english": "Transcend",
+    "japanese": "トランセンド",
+    "chineseTraditional": "創昇",
+    "chineseSimplified": "创升"
+  },
+  {
+    "id": "tsurumaru_tsuyoshi",
+    "english": "Tsurumaru Tsuyoshi",
+    "japanese": "ツルマルツヨシ",
+    "chineseTraditional": "鶴丸剛志 / 鶴丸強志",
+    "chineseSimplified": "鹤丸刚志"
+  },
+  {
+    "id": "twin_turbo",
+    "english": "Twin Turbo",
+    "japanese": "ツインターボ",
+    "chineseTraditional": "雙渦輪",
+    "chineseSimplified": "双涡轮"
+  },
+  {
+    "id": "verxina",
+    "english": "Verxina",
+    "japanese": "ヴィルシーナ",
+    "chineseTraditional": "極峰",
+    "chineseSimplified": "极峰"
+  },
+  {
+    "id": "victoire_pisa",
+    "english": "Victoire Pisa",
+    "japanese": "ヴィクトワールピサ",
+    "chineseTraditional": "比薩勝駒",
+    "chineseSimplified": "比萨胜驹"
+  },
+  {
+    "id": "vivlos",
+    "english": "Vivlos",
+    "japanese": "ヴィブロス",
+    "chineseTraditional": "比布魯斯",
+    "chineseSimplified": "强击"
+  },
+  {
+    "id": "vodka",
+    "english": "Vodka",
+    "japanese": "ウオッカ",
+    "chineseTraditional": "伏特加",
+    "chineseSimplified": "伏特加"
+  },
+  {
+    "id": "win_variation",
+    "english": "Win Variation",
+    "japanese": "ウインバリアシオン",
+    "chineseTraditional": "凱旋芭蕾",
+    "chineseSimplified": "凯旋芭蕾"
+  },
+  {
+    "id": "winning_ticket",
+    "english": "Winning Ticket",
+    "japanese": "ウイニングチケット",
+    "chineseTraditional": "勝利獎券",
+    "chineseSimplified": "胜利奖券"
+  },
+  {
+    "id": "wonder_acute",
+    "english": "Wonder Acute",
+    "japanese": "ワンダーアキュート",
+    "chineseTraditional": "奇銳駿",
+    "chineseSimplified": "奇锐骏"
+  },
+  {
+    "id": "yaeno_muteki",
+    "english": "Yaeno Muteki",
+    "japanese": "ヤエノムテキ",
+    "chineseTraditional": "八重無敵",
+    "chineseSimplified": "八重无敌"
+  },
+  {
+    "id": "yamanin_zephyr",
+    "english": "Yamanin Zephyr",
+    "japanese": "ヤマニンゼファー",
+    "chineseTraditional": "山人西風",
+    "chineseSimplified": "也文摄辉"
+  },
+  {
+    "id": "yukino_bijin",
+    "english": "Yukino Bijin",
+    "japanese": "ユキノビジン",
+    "chineseTraditional": "雪之美人",
+    "chineseSimplified": "雪之美人"
+  },
+  {
+    "id": "zenno_rob_roy",
+    "english": "Zenno Rob Roy",
+    "japanese": "ゼンノロブロイ",
+    "chineseTraditional": "荒漠英雄",
+    "chineseSimplified": "荒漠英雄"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "name": "umamusume-shared-todolist",
+  "version": "1.0.0",
+  "description": "可共享的赛马娘角色清单（shared Umamusume character checklist）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^4.21.0"
+  }
+}

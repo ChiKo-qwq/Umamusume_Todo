@@ -1,0 +1,9 @@
+services:
+  todolist:
+    build: .
+    container_name: umamusume-todolist
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
