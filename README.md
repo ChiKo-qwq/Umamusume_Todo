@@ -1,7 +1,9 @@
-# URA符卡工坊
+# URA守札社
+
 原用于社团制品统计
-一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`），
-任何打开网页的人都能查看并更新同一份清单，进度实时同步，无需登录。
+
+一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`）。
+**查看无需登录，修改需要密码。**
 
 ## 功能
 
@@ -9,17 +11,18 @@
 - 三态进度：点击卡片循环切换「未开始 → 制作中 → 已完成」
 - 搜索过滤（支持中文 / 日文 / 英文）
 - 多人共享同一份清单，2 秒自动同步
+- 查看公开，修改需密码解锁
 - 每天 0 点自动重新抓取数据源，更新清单
-- 双端口：**可写界面**（能勾选）+ **只读界面**（只能看）
 
-## 双端口说明
+## 访问与密码
 
-| 端口 | 类型 | 说明 |
-| --- | --- | --- |
-| `xxxx` | 可写 | 可以切换状态、重置 |
-| `3000` | 只读 | 只能查看，无法修改（适合投屏/分享给只看的人） |
+| 项目 | 值 |
+| --- | --- |
+| 端口 | `3000` |
+| 查看 | 无需登录 |
+| 修改密码 | 环境变量 `PASSWORD`（默认 `20120314`） |
 
-两个端口共享同一份数据和勾选状态，只读页会自动实时刷新。
+修改密码会以请求头 `X-Password` 发送，服务端校验通过后才允许写入。
 
 ## 每日自动刷新
 
@@ -29,44 +32,39 @@
 - https://wiki.biligame.com/umamusume/赛马娘一览
 
 抓取成功后自动更新 `characters.json` 和 `umamusume_characters.csv`，
-网页清单也会随之刷新（角色增删会同步，已有的勾选状态会保留）。
+网页清单也会随之刷新（角色增删会同步，已有的状态会保留）。
 若抓取失败，会保留旧数据并在日志中报错。
 
-可通过环境变量调整：
+## 环境变量
 
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
-| `PORT` | `xxxx` | 可写界面端口 |
-| `READONLY_PORT` | `3000` | 只读界面端口 |
+| `PORT` | `3000` | 监听端口 |
+| `PASSWORD` | `20120314` | 修改密码 |
 | `REFRESH_HOUR` | `0` | 每天刷新的小时（0-23） |
 | `REFRESH_MINUTE` | `0` | 每天刷新的分钟（0-59） |
-| `REFRESH_TOKEN` | 空 | 设置后，手动刷新接口需要携带此 token |
 | `CSV_PATH` | `umamusume_characters.csv` | CSV 输出文件名（相对于项目目录） |
 
-手动触发刷新（可选，`REFRESH_TOKEN` 设置了则需带上）：
+手动触发刷新（需带密码）：
 
 ```bash
-curl -X POST http://localhost:2012/api/refresh
-# 带 token：
-curl -X POST http://localhost:2012/api/refresh -H "Authorization: Bearer 你的token"
+curl -X POST http://localhost:3000/api/refresh -H "X-Password: 你的密码"
 ```
 
 ## 目录结构
 
 ```
 todo-app/
-├── server.js            # Express 后端 + 每日定时刷新 + 双端口
+├── server.js            # Express 后端 + 每日定时刷新 + 密码校验
 ├── scraper.js           # 抓取逻辑（umamusu.wiki + biligame）
 ├── package.json
 ├── characters.json      # 角色数据（由抓取生成）
 ├── umamusume_characters.csv  # CSV（由抓取生成）
 ├── data/state.json      # 勾选状态（自动生成，持久化）
 └── public/
-    ├── index.html       # 可写界面
-    ├── readonly.html    # 只读界面
-    ├── app.js
-    ├── readonly.js
-    └── style.css
+    ├── index.html
+    ├── style.css
+    └── app.js
 ```
 
 ## 部署方式（任选其一）
@@ -78,7 +76,7 @@ todo-app/
 ```bash
 cd todo-app
 npm install
-npm start          # 可写界面 2012，只读界面 3000
+npm start          # 默认监听 3000 端口
 ```
 
 生产环境建议用进程守护工具，例如 pm2：
@@ -90,10 +88,10 @@ pm2 save
 pm2 startup
 ```
 
-自定义端口：
+自定义端口或密码：
 
 ```bash
-PORT=8080 READONLY_PORT=8081 npm start
+PORT=8080 PASSWORD=你的密码 npm start
 ```
 
 ### 方式 B：Docker（推荐，最省心）
@@ -109,7 +107,7 @@ docker compose up -d --build
 
 ### 方式 C：Nginx 反向代理（可选，绑定域名 + HTTPS）
 
-把 xxxx（可写）端口反代到你的域名：
+把 3000 端口反代到你的域名：
 
 ```nginx
 server {
@@ -117,7 +115,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://127.0.0.1:xxxx;
+        proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -129,12 +127,10 @@ server {
 
 ## 如何共享给别人
 
-部署完成后有两个地址：
+部署完成后，把 `http://你的服务器IP:3000` 发给对方即可。
 
-- 可写界面（能勾选）：`http://你的服务器IP:xxxx`
-- 只读界面（只能看）：`http://你的服务器IP:3000`
-
-把可写地址发给需要操作的人，只读地址发给只需要查看的人。
+- 对方打开就能**查看**清单；
+- 要**修改**，需要输入密码（默认 `20120314`）。
 
 ## 自定义角色数据
 

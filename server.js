@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const { scrapeCharacters, charactersToCsv } = require('./scraper');
 
-const PORT = process.env.PORT || 2012;                    // 可写界面
-const READONLY_PORT = process.env.READONLY_PORT || 3000;  // 只读界面
+const PORT = process.env.PORT || 3000;
+const PASSWORD = process.env.PASSWORD || '20120314';
 
 const CHARACTERS_FILE = path.join(__dirname, 'characters.json');
 const CSV_FILE = path.join(__dirname, process.env.CSV_PATH || 'umamusume_characters.csv');
@@ -24,7 +24,7 @@ function loadCharacters() {
 let characters = loadCharacters();
 let charIds = new Set(characters.map((c) => c.id));
 
-// 勾选状态：status[id] = 'doing' | 'done'（'none' 不存储）
+// 状态：status[id] = 'doing' | 'done'（'none' 不存储）
 let state = { version: 0, status: {} };
 try {
   const raw = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
@@ -33,7 +33,6 @@ try {
     if (raw.status && typeof raw.status === 'object') {
       state.status = raw.status;
     } else if (raw.done && typeof raw.done === 'object') {
-      // 兼容旧格式：done:true → 已完成
       state.status = {};
       for (const [id, v] of Object.entries(raw.done)) {
         if (v) state.status[id] = 'done';
@@ -56,47 +55,10 @@ function itemsPayload() {
   return { version: state.version, total: characters.length, items };
 }
 
-// ---------- 可写应用 ----------
-const writableApp = express();
-writableApp.use(express.json());
-writableApp.use(express.static(path.join(__dirname, 'public')));
-
-writableApp.get('/api/items', (req, res) => res.json(itemsPayload()));
-
-writableApp.post('/api/items/:id', (req, res) => {
-  const id = req.params.id;
-  if (!charIds.has(id)) return res.status(404).json({ error: 'Unknown item' });
-  const status = req.body && req.body.status;
-  if (!STATUSES.includes(status)) return res.status(400).json({ error: 'Invalid status' });
-  if (status === 'none') delete state.status[id];
-  else state.status[id] = status;
-  state.version += 1;
-  save();
-  res.json({ id, status, version: state.version });
-});
-
-writableApp.post('/api/reset', (req, res) => {
-  state.status = {};
-  state.version += 1;
-  save();
-  res.json({ version: state.version });
-});
-
-writableApp.post('/api/refresh', async (req, res) => {
-  const token = process.env.REFRESH_TOKEN;
-  if (token) {
-    const provided = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || req.query.token;
-    if (provided !== token) return res.status(403).json({ error: 'Forbidden' });
-  }
-  if (refreshing) return res.json({ status: 'already-running' });
-  res.json({ status: 'started' });
-  refresh().catch((err) => console.error('❌ 手动刷新失败：', err.message));
-});
-
-// ---------- 只读应用（仅 GET，无任何写入接口） ----------
-const readonlyApp = express();
-readonlyApp.get('/api/items', (req, res) => res.json(itemsPayload()));
-readonlyApp.use(express.static(path.join(__dirname, 'public'), { index: 'readonly.html' }));
+function checkPassword(req) {
+  const provided = req.headers['x-password'];
+  return provided != null && String(provided) === PASSWORD;
+}
 
 // ---------- 每日刷新 ----------
 let refreshing = false;
@@ -146,9 +108,47 @@ function scheduleDailyRefresh() {
   tick();
 }
 
-writableApp.listen(PORT, () => {
-  console.log(`✏️  可写界面：http://localhost:${PORT}`);
-  console.log(`👁  只读界面：http://localhost:${READONLY_PORT}`);
+// ---------- 应用（单端口，读取公开，写入需密码） ----------
+const app = express();
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/api/items', (req, res) => res.json(itemsPayload()));
+
+app.post('/api/verify', (req, res) => {
+  if (checkPassword(req)) res.json({ ok: true });
+  else res.status(401).json({ ok: false, error: '密码错误' });
+});
+
+app.post('/api/items/:id', (req, res) => {
+  if (!checkPassword(req)) return res.status(401).json({ error: '密码错误' });
+  const id = req.params.id;
+  if (!charIds.has(id)) return res.status(404).json({ error: 'Unknown item' });
+  const status = req.body && req.body.status;
+  if (!STATUSES.includes(status)) return res.status(400).json({ error: 'Invalid status' });
+  if (status === 'none') delete state.status[id];
+  else state.status[id] = status;
+  state.version += 1;
+  save();
+  res.json({ id, status, version: state.version });
+});
+
+app.post('/api/reset', (req, res) => {
+  if (!checkPassword(req)) return res.status(401).json({ error: '密码错误' });
+  state.status = {};
+  state.version += 1;
+  save();
+  res.json({ version: state.version });
+});
+
+app.post('/api/refresh', async (req, res) => {
+  if (!checkPassword(req)) return res.status(401).json({ error: '密码错误' });
+  if (refreshing) return res.json({ status: 'already-running' });
+  res.json({ status: 'started' });
+  refresh().catch((err) => console.error('❌ 手动刷新失败：', err.message));
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ URA守札社 running at http://localhost:${PORT}`);
   scheduleDailyRefresh();
 });
-readonlyApp.listen(READONLY_PORT, () => {});

@@ -75,6 +75,18 @@ body {
 
 .controls input[type="search"]:focus { border-color: var(--accent); }
 
+.controls input[type="password"] {
+  width: 120px;
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+}
+
+.controls input[type="password"]:focus { border-color: var(--accent); }
+
 .controls button {
   padding: 9px 14px;
   font-size: 14px;
@@ -87,6 +99,12 @@ body {
 }
 
 .controls button:hover { background: #fef2f2; }
+
+.controls button.unlocked {
+  color: var(--done);
+  border-color: #bbf7d0;
+  background: var(--done-soft);
+}
 
 .progress-track {
   height: 8px;

@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URA符卡工坊</title>
+  <title>URA守札社</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <h1>URA符卡工坊</h1>
+        <h1>URA守札社</h1>
         <p class="subtitle">Umamusume Shared Checklist · 共 <span id="total">145</span> 项</p>
       </div>
       <div class="controls">
         <input id="search" type="search" placeholder="搜索名称 / 日文 / 英文…" autocomplete="off" />
+        <input id="password" type="password" placeholder="修改密码" autocomplete="off" />
+        <button id="unlock" type="button">🔒 解锁</button>
       </div>
     </div>
     <div class="progress-track">
@@ -33,7 +35,7 @@
   </main>
 
   <footer class="footer container">
-    <span id="sync-status">加载中…</span>
+    <span id="sync-status">加载中…</span> · 查看无需登录，修改需密码
   </footer>
 
   <script src="app.js"></script>

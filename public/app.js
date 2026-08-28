@@ -2,6 +2,8 @@
   const listEl = document.getElementById('list');
   const emptyEl = document.getElementById('empty');
   const searchEl = document.getElementById('search');
+  const passwordEl = document.getElementById('password');
+  const unlockBtn = document.getElementById('unlock');
   const doneCountEl = document.getElementById('done-count');
   const doingCountEl = document.getElementById('doing-count');
   const totalEl = document.getElementById('total');
@@ -10,6 +12,8 @@
   const syncStatusEl = document.getElementById('sync-status');
 
   const state = { items: [], version: -1, search: '' };
+  let unlocked = false;
+  let password = '';
 
   const NEXT = { none: 'doing', doing: 'done', done: 'none' };
   const LABEL = { none: '未开始', doing: '制作中', done: '已完成' };
@@ -43,7 +47,7 @@
     const filtered = state.items.filter(matches);
     listEl.innerHTML = filtered.map((it) => `
       <li class="item st-${it.status}" data-id="${escapeHtml(it.id)}">
-        <div class="card" data-id="${escapeHtml(it.id)}" title="点击切换状态">
+        <div class="card" data-id="${escapeHtml(it.id)}" title="${unlocked ? '点击切换状态' : '需解锁后才能修改'}">
           <span class="status st-${it.status}">${LABEL[it.status]}</span>
           <span class="names">
             <span class="primary">${escapeHtml(it.chineseSimplified)}</span>
@@ -55,7 +59,6 @@
     updateStats();
   }
 
-  // 只更新已渲染的状态标签，避免整页重建导致交互中断
   function updateChecks() {
     for (const it of state.items) {
       const li = listEl.querySelector(`li[data-id="${CSS.escape(it.id)}"]`);
@@ -82,7 +85,7 @@
     try {
       const res = await fetch('/api/items');
       const data = await res.json();
-      syncStatusEl.textContent = '已同步';
+      syncStatusEl.textContent = unlocked ? '已同步 · 可修改' : '已同步';
       if (data.version !== state.version) {
         state.items = data.items;
         state.version = data.version;
@@ -93,7 +96,64 @@
     }
   }
 
+  function setLockedUI() {
+    if (unlocked) {
+      passwordEl.style.display = 'none';
+      unlockBtn.textContent = '🔓 锁定';
+      unlockBtn.classList.add('unlocked');
+    } else {
+      passwordEl.style.display = '';
+      unlockBtn.textContent = '🔒 解锁';
+      unlockBtn.classList.remove('unlocked');
+    }
+  }
+
+  async function unlock() {
+    const pw = passwordEl.value.trim();
+    if (!pw) {
+      syncStatusEl.textContent = '请输入密码';
+      passwordEl.focus();
+      return;
+    }
+    try {
+      const res = await fetch('/api/verify', { method: 'POST', headers: { 'X-Password': pw } });
+      if (res.ok) {
+        unlocked = true;
+        password = pw;
+        passwordEl.value = '';
+        setLockedUI();
+        syncStatusEl.textContent = '已解锁，可修改';
+      } else {
+        syncStatusEl.textContent = '密码错误';
+        passwordEl.value = '';
+        passwordEl.focus();
+      }
+    } catch (e) {
+      syncStatusEl.textContent = '验证失败，请重试';
+    }
+  }
+
+  unlockBtn.addEventListener('click', () => {
+    if (unlocked) {
+      unlocked = false;
+      password = '';
+      setLockedUI();
+      syncStatusEl.textContent = '已锁定';
+    } else {
+      unlock();
+    }
+  });
+
+  passwordEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') unlock();
+  });
+
   function cycle(id) {
+    if (!unlocked) {
+      syncStatusEl.textContent = '请先解锁才能修改';
+      passwordEl.focus();
+      return;
+    }
     const it = state.items.find((x) => x.id === id);
     if (!it) return;
     const next = NEXT[it.status] || 'doing';
@@ -112,8 +172,16 @@
 
     fetch(`/api/items/${encodeURIComponent(id)}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-Password': password },
       body: JSON.stringify({ status: next }),
+    }).then((res) => {
+      if (res.status === 401) {
+        unlocked = false;
+        password = '';
+        setLockedUI();
+        syncStatusEl.textContent = '密码已失效，请重新解锁';
+        load();
+      }
     }).catch(() => { syncStatusEl.textContent = '保存失败，稍后自动重试'; });
   }
 
@@ -127,6 +195,7 @@
     render();
   });
 
+  setLockedUI();
   load();
   setInterval(poll, 2000);
 })();
