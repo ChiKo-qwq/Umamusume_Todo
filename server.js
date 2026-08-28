@@ -4,7 +4,7 @@ const path = require('path');
 const { scrapeCharacters, charactersToCsv } = require('./scraper');
 
 const PORT = process.env.PORT || 3000;
-const PASSWORD = process.env.PASSWORD || '20120314';
+const PASSWORD = process.env.PASSWORD || '12345678';
 
 const CHARACTERS_FILE = path.join(__dirname, 'characters.json');
 const CSV_FILE = path.join(__dirname, process.env.CSV_PATH || 'umamusume_characters.csv');

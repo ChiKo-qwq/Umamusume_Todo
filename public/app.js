@@ -2,8 +2,12 @@
   const listEl = document.getElementById('list');
   const emptyEl = document.getElementById('empty');
   const searchEl = document.getElementById('search');
-  const passwordEl = document.getElementById('password');
   const unlockBtn = document.getElementById('unlock');
+  const modalEl = document.getElementById('modal');
+  const modalPasswordEl = document.getElementById('modal-password');
+  const modalOkBtn = document.getElementById('modal-ok');
+  const modalCancelBtn = document.getElementById('modal-cancel');
+  const modalErrorEl = document.getElementById('modal-error');
   const doneCountEl = document.getElementById('done-count');
   const doingCountEl = document.getElementById('doing-count');
   const totalEl = document.getElementById('total');
@@ -98,21 +102,30 @@
 
   function setLockedUI() {
     if (unlocked) {
-      passwordEl.style.display = 'none';
       unlockBtn.textContent = '🔓 锁定';
       unlockBtn.classList.add('unlocked');
     } else {
-      passwordEl.style.display = '';
       unlockBtn.textContent = '🔒 解锁';
       unlockBtn.classList.remove('unlocked');
     }
   }
 
-  async function unlock() {
-    const pw = passwordEl.value.trim();
+  function showModal() {
+    modalErrorEl.hidden = true;
+    modalPasswordEl.value = '';
+    modalEl.hidden = false;
+    modalPasswordEl.focus();
+  }
+
+  function hideModal() {
+    modalEl.hidden = true;
+  }
+
+  async function doUnlock() {
+    const pw = modalPasswordEl.value.trim();
     if (!pw) {
-      syncStatusEl.textContent = '请输入密码';
-      passwordEl.focus();
+      modalErrorEl.textContent = '请输入密码';
+      modalErrorEl.hidden = false;
       return;
     }
     try {
@@ -120,16 +133,18 @@
       if (res.ok) {
         unlocked = true;
         password = pw;
-        passwordEl.value = '';
+        hideModal();
         setLockedUI();
         syncStatusEl.textContent = '已解锁，可修改';
       } else {
-        syncStatusEl.textContent = '密码错误';
-        passwordEl.value = '';
-        passwordEl.focus();
+        modalErrorEl.textContent = '密码错误';
+        modalErrorEl.hidden = false;
+        modalPasswordEl.value = '';
+        modalPasswordEl.focus();
       }
     } catch (e) {
-      syncStatusEl.textContent = '验证失败，请重试';
+      modalErrorEl.textContent = '验证失败，请重试';
+      modalErrorEl.hidden = false;
     }
   }
 
@@ -140,18 +155,20 @@
       setLockedUI();
       syncStatusEl.textContent = '已锁定';
     } else {
-      unlock();
+      showModal();
     }
   });
 
-  passwordEl.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') unlock();
+  modalOkBtn.addEventListener('click', doUnlock);
+  modalCancelBtn.addEventListener('click', hideModal);
+  modalPasswordEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') doUnlock();
+    if (e.key === 'Escape') hideModal();
   });
 
   function cycle(id) {
     if (!unlocked) {
-      syncStatusEl.textContent = '请先解锁才能修改';
-      passwordEl.focus();
+      showModal();
       return;
     }
     const it = state.items.find((x) => x.id === id);
@@ -181,6 +198,7 @@
         setLockedUI();
         syncStatusEl.textContent = '密码已失效，请重新解锁';
         load();
+        showModal();
       }
     }).catch(() => { syncStatusEl.textContent = '保存失败，稍后自动重试'; });
   }

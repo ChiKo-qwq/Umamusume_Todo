@@ -15,7 +15,6 @@
       </div>
       <div class="controls">
         <input id="search" type="search" placeholder="搜索名称 / 日文 / 英文…" autocomplete="off" />
-        <input id="password" type="password" placeholder="修改密码" autocomplete="off" />
         <button id="unlock" type="button">🔒 解锁</button>
       </div>
     </div>
@@ -37,6 +36,19 @@
   <footer class="footer container">
     <span id="sync-status">加载中…</span> · 查看无需登录，修改需密码
   </footer>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box">
+      <h2>输入密码</h2>
+      <p class="modal-tip">修改清单需要密码</p>
+      <input id="modal-password" type="password" placeholder="请输入密码" autocomplete="off" />
+      <div class="modal-actions">
+        <button id="modal-cancel" type="button">取消</button>
+        <button id="modal-ok" type="button" class="primary">确定</button>
+      </div>
+      <p id="modal-error" class="modal-error" hidden>密码错误</p>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

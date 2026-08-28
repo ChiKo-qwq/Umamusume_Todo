@@ -75,17 +75,71 @@ body {
 
 .controls input[type="search"]:focus { border-color: var(--accent); }
 
-.controls input[type="password"] {
-  width: 120px;
-  padding: 9px 12px;
-  font-size: 14px;
+/* 密码弹窗 */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal[hidden] { display: none; }
+
+.modal-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h2 { margin: 0 0 4px; font-size: 18px; }
+
+.modal-tip { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+
+.modal-box input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
   border: 1px solid var(--border);
   border-radius: 10px;
   outline: none;
-  background: #fff;
+  margin-bottom: 14px;
 }
 
-.controls input[type="password"]:focus { border-color: var(--accent); }
+.modal-box input[type="password"]:focus { border-color: var(--accent); }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+}
+
+.modal-actions button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.modal-error {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #dc2626;
+}
 
 .controls button {
   padding: 9px 14px;

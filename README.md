@@ -1,6 +1,4 @@
-# URA守札社
-
-原用于社团制品统计
+# URA守札社社团制品统计
 
 一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`）。
 **查看无需登录，修改需要密码。**
@@ -20,9 +18,42 @@
 | --- | --- |
 | 端口 | `3000` |
 | 查看 | 无需登录 |
-| 修改密码 | 环境变量 `PASSWORD`（默认 `20120314`） |
+| 修改密码 | 环境变量 `PASSWORD`（默认 `12345678`） |
 
 修改密码会以请求头 `X-Password` 发送，服务端校验通过后才允许写入。
+
+### 如何在服务器上修改密码
+
+密码通过环境变量 `PASSWORD` 设置，默认 `12345678`。
+
+**Docker 部署**：编辑 `docker-compose.yml`，在 `services.todolist` 下加：
+
+```yaml
+    environment:
+      - PASSWORD=你的新密码
+```
+
+然后：
+
+```bash
+docker compose up -d
+```
+
+**Node / pm2 部署**：
+
+```bash
+pm2 delete umamusume-todolist
+PASSWORD=你的新密码 pm2 start server.js --name umamusume-todolist
+pm2 save
+```
+
+**直接运行**：
+
+```bash
+PASSWORD=你的新密码 npm start
+```
+
+修改后刷新页面重新解锁即可生效。
 
 ## 每日自动刷新
 
@@ -40,7 +71,7 @@
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
 | `PORT` | `3000` | 监听端口 |
-| `PASSWORD` | `20120314` | 修改密码 |
+| `PASSWORD` | `12345678` | 修改密码 |
 | `REFRESH_HOUR` | `0` | 每天刷新的小时（0-23） |
 | `REFRESH_MINUTE` | `0` | 每天刷新的分钟（0-59） |
 | `CSV_PATH` | `umamusume_characters.csv` | CSV 输出文件名（相对于项目目录） |
@@ -130,7 +161,7 @@ server {
 部署完成后，把 `http://你的服务器IP:3000` 发给对方即可。
 
 - 对方打开就能**查看**清单；
-- 要**修改**，需要输入密码（默认 `20120314`）。
+- 要**修改**，需要输入密码（默认 `12345678`）。
 
 ## 自定义角色数据
 

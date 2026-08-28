@@ -8,7 +8,7 @@ RUN npm install --omit=dev
 COPY . .
 
 ENV PORT=3000
-ENV PASSWORD=20120314
+ENV PASSWORD=12345678
 EXPOSE 3000
 
 CMD ["node", "server.js"]
