@@ -1,4 +1,4 @@
-# 赛马娘 共享清单（Umamusume Shared Todo List）
+# URA符卡工坊
 原用于社团制品统计
 一个可共享的赛马娘角色清单：145 个角色（数据来自 `umamusume_characters.csv`），
 任何打开网页的人都能查看并更新同一份清单，进度实时同步，无需登录。
