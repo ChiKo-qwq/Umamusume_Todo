@@ -29,6 +29,12 @@
   </header>
 
   <main class="container">
+    <div id="status-filters" class="status-filters" role="group" aria-label="按制作状态筛选">
+      <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" class="filter-btn" data-filter="none" aria-pressed="false">未制作</button>
+      <button type="button" class="filter-btn" data-filter="doing" aria-pressed="false">制作中</button>
+      <button type="button" class="filter-btn" data-filter="done" aria-pressed="false">已完成</button>
+    </div>
     <ul id="list" class="list"></ul>
     <p id="empty" class="empty" hidden>没有匹配的结果</p>
   </main>

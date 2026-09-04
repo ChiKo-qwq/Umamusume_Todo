@@ -14,8 +14,9 @@
   const total2El = document.getElementById('total2');
   const progressBarEl = document.getElementById('progress-bar');
   const syncStatusEl = document.getElementById('sync-status');
+  const statusFiltersEl = document.getElementById('status-filters');
 
-  const state = { items: [], version: -1, search: '' };
+  const state = { items: [], version: -1, search: '', filter: 'all' };
   let unlocked = false;
   let password = '';
 
@@ -29,10 +30,21 @@
   }
 
   function matches(item) {
+    if (state.filter !== 'all' && item.status !== state.filter) return false;
     if (!state.search) return true;
     const q = state.search.toLowerCase();
     return [item.chineseSimplified, item.chineseTraditional, item.english, item.japanese]
       .some((v) => v && v.toLowerCase().includes(q));
+  }
+
+  function setFilter(filter) {
+    state.filter = filter;
+    for (const button of statusFiltersEl.querySelectorAll('.filter-btn')) {
+      const selected = button.dataset.filter === filter;
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    }
+    render();
   }
 
   function updateStats() {
@@ -63,20 +75,6 @@
     updateStats();
   }
 
-  function updateChecks() {
-    for (const it of state.items) {
-      const li = listEl.querySelector(`li[data-id="${CSS.escape(it.id)}"]`);
-      if (!li) continue;
-      li.className = `item st-${it.status}`;
-      const badge = li.querySelector('.status');
-      if (badge) {
-        badge.className = `status st-${it.status}`;
-        badge.textContent = LABEL[it.status];
-      }
-    }
-    updateStats();
-  }
-
   async function load() {
     const res = await fetch('/api/items');
     const data = await res.json();
@@ -93,7 +91,7 @@
       if (data.version !== state.version) {
         state.items = data.items;
         state.version = data.version;
-        updateChecks();
+        render();
       }
     } catch (e) {
       syncStatusEl.textContent = '连接中断，正在重试…';
@@ -175,17 +173,7 @@
     if (!it) return;
     const next = NEXT[it.status] || 'doing';
     it.status = next;
-
-    const li = listEl.querySelector(`li[data-id="${CSS.escape(id)}"]`);
-    if (li) {
-      li.className = `item st-${next}`;
-      const badge = li.querySelector('.status');
-      if (badge) {
-        badge.className = `status st-${next}`;
-        badge.textContent = LABEL[next];
-      }
-    }
-    updateStats();
+    render();
 
     fetch(`/api/items/${encodeURIComponent(id)}`, {
       method: 'POST',
@@ -211,6 +199,11 @@
   searchEl.addEventListener('input', () => {
     state.search = searchEl.value.trim();
     render();
+  });
+
+  statusFiltersEl.addEventListener('click', (e) => {
+    const button = e.target.closest('.filter-btn');
+    if (button) setFilter(button.dataset.filter);
   });
 
   setLockedUI();
