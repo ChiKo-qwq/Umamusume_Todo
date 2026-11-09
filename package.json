@@ -4,7 +4,8 @@
   "description": "可共享的赛马娘角色清单（shared Umamusume character checklist）",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:inventory": "node --test tests/inventory.test.js"
   },
   "engines": {
     "node": ">=18"

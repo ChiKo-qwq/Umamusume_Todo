@@ -4,6 +4,12 @@ services:
     container_name: umamusume-todolist
     ports:
       - "3000:3000"
+    environment:
+      PASSWORD: ${PASSWORD:-12345678}
+      TAOBAO_SYNC_ENABLED: ${TAOBAO_SYNC_ENABLED:-false}
+      TAOBAO_APP_KEY: ${TAOBAO_APP_KEY:-}
+      TAOBAO_APP_SECRET: ${TAOBAO_APP_SECRET:-}
+      TAOBAO_SESSION: ${TAOBAO_SESSION:-}
     volumes:
       - ./data:/app/data
     restart: unless-stopped

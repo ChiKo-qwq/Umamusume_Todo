@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const { scrapeCharacters, charactersToCsv } = require('./scraper');
+const { createInventoryStore } = require('./inventory');
+const { createTaobaoClient, createTaobaoSync } = require('./taobao');
 
 const PORT = process.env.PORT || 3000;
 const PASSWORD = process.env.PASSWORD || '12345678';
@@ -10,6 +12,7 @@ const CHARACTERS_FILE = path.join(__dirname, 'characters.json');
 const CSV_FILE = path.join(__dirname, process.env.CSV_PATH || 'umamusume_characters.csv');
 const DATA_DIR = path.join(__dirname, 'data');
 const STATE_FILE = path.join(DATA_DIR, 'state.json');
+const inventory = createInventoryStore(path.join(DATA_DIR, 'inventory.json'));
 
 const STATUSES = ['none', 'doing', 'done'];
 
@@ -23,6 +26,7 @@ function loadCharacters() {
 }
 let characters = loadCharacters();
 let charIds = new Set(characters.map((c) => c.id));
+const taobaoSync = createTaobaoSync({ store: inventory, client: createTaobaoClient(), getCharacters: () => characters });
 
 // 状态：status[id] = 'doing' | 'done'（'none' 不存储）
 let state = { version: 0, status: {} };
@@ -115,6 +119,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/items', (req, res) => res.json(itemsPayload()));
 
+app.get('/api/inventory', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json({
+    version: inventory.snapshot().version,
+    items: characters.map((item) => ({ ...item, status: state.status[item.id] || 'none', ...inventory.get(item.id) })),
+    taobao: taobaoSync.status(),
+  });
+});
+
+app.post('/api/inventory/:id', (req, res) => {
+  if (!checkPassword(req)) return res.status(401).json({ error: '密码错误' });
+  if (!charIds.has(req.params.id)) return res.status(404).json({ error: '找不到该角色' });
+  try {
+    const record = inventory.update(req.params.id, req.body);
+    res.json({ id: req.params.id, ...record });
+  } catch (error) {
+    res.status(error.status || 500).json({
+      error: error.status ? error.message : '库存保存失败，请检查服务器存储后重试',
+      ...(error.status === 409 ? { current: inventory.get(req.params.id) } : {}),
+    });
+  }
+});
+
+app.post('/api/taobao/sync', async (req, res) => {
+  if (!checkPassword(req)) return res.status(401).json({ error: '密码错误' });
+  try {
+    const result = await taobaoSync.run();
+    res.status(result.busy ? 409 : result.unavailable ? 503 : 200).json(result);
+  } catch {
+    res.status(500).json({ error: '同步记录保存失败，请检查服务器存储' });
+  }
+});
+
 app.post('/api/verify', (req, res) => {
   if (checkPassword(req)) res.json({ ok: true });
   else res.status(401).json({ ok: false, error: '密码错误' });
@@ -151,4 +188,5 @@ app.post('/api/refresh', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ URA守札社 running at http://localhost:${PORT}`);
   scheduleDailyRefresh();
+  taobaoSync.start();
 });

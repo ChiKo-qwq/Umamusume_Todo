@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>御守库存 · URA守札社</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <h1>御守库存</h1>
+        <p class="subtitle">URA守札社 · 当前可售现货</p>
+      </div>
+      <div class="controls">
+        <a class="nav-button" href="/">返回制作清单</a>
+        <button id="unlock" type="button">🔒 解锁编辑</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container inventory-main">
+    <section class="inventory-overview" aria-label="库存概览">
+      <div><span class="overview-label">现货总数</span><strong id="stock-total">—</strong><span>枚</span></div>
+      <div><span class="overview-label">有货角色</span><strong id="stock-characters">—</strong><span>位</span></div>
+      <div><span class="overview-label">待录入库存</span><strong id="stock-unset">—</strong><span>位</span></div>
+    </section>
+    <section class="taobao-panel" aria-label="淘宝同步状态">
+      <div>
+        <h2>淘宝库存同步 <span class="sync-badge" id="taobao-badge">加载中</span></h2>
+        <p id="taobao-status">每天 00:00（北京时间）同步到淘宝商品。</p>
+        <p id="taobao-last" hidden></p>
+        <details id="taobao-errors" hidden><summary>查看同步失败详情</summary><ul></ul></details>
+      </div>
+      <button id="sync-now" type="button" disabled>立即同步淘宝</button>
+    </section>
+    <div class="inventory-toolbar">
+      <input id="inventory-search" type="search" aria-label="搜索角色" placeholder="搜索名称 / 日文 / 英文…" autocomplete="off" />
+      <div id="inventory-filters" class="status-filters" role="group" aria-label="筛选库存">
+        <button class="filter-btn active" type="button" data-filter="made" aria-pressed="true">已制作 / 已录入</button>
+        <button class="filter-btn" type="button" data-filter="stock" aria-pressed="false">有现货</button>
+        <button class="filter-btn" type="button" data-filter="all" aria-pressed="false">全部角色</button>
+      </div>
+    </div>
+    <p class="inventory-hint">输入当前可售数量，停止输入后自动保存到服务器。尚未录入的库存不会同步淘宝；填 0 可同步售罄。销量不会自动回写，请保持这里的可售数量准确。</p>
+    <p id="inventory-connection" role="status" aria-live="polite">正在加载库存…</p>
+    <ul id="inventory-list" class="inventory-list"></ul>
+    <p id="inventory-empty" class="empty" hidden>暂无符合条件的角色。可切换「全部角色」录入库存。</p>
+  </main>
+  <footer class="footer container">查看无需登录，编辑和淘宝同步需密码 · 库存独立于制作进度保存</footer>
+
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <form id="unlock-form" class="modal-box">
+      <h2 id="modal-title">解锁库存编辑</h2>
+      <p class="modal-tip">使用制作清单的修改密码</p>
+      <input id="modal-password" type="password" aria-label="修改密码" placeholder="请输入密码" autocomplete="current-password" required />
+      <div class="modal-actions">
+        <button id="modal-cancel" type="button">取消</button>
+        <button type="submit" class="primary">确定</button>
+      </div>
+      <p id="modal-error" class="modal-error" role="alert" hidden></p>
+    </form>
+  </div>
+  <script src="/inventory.js"></script>
+</body>
+</html>
