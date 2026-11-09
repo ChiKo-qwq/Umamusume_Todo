@@ -84,7 +84,7 @@
         row.className = 'inventory-card';
         row.dataset.id = item.id;
         row.innerHTML = `<div class="inventory-card-heading"><div class="names"><span class="primary"></span><span class="secondary"></span></div><span class="stock-tag"></span></div>
-          <div class="quantity-line"><label>可售库存 <input class="quantity-input" type="number" min="0" max="999999" step="1" inputmode="numeric" placeholder="未录入" /></label><span>枚</span></div>
+          <div class="quantity-line"><label for="stock-${escape(item.id)}">可售库存</label><div class="quantity-stepper"><button type="button" class="quantity-step" data-action="decrease" aria-label="${escape(item.chineseSimplified)}库存减1">−</button><input id="stock-${escape(item.id)}" class="quantity-input" type="number" min="0" max="999999" step="1" inputmode="numeric" placeholder="未录入" /><button type="button" class="quantity-step" data-action="increase" aria-label="${escape(item.chineseSimplified)}库存加1">＋</button></div><span>枚</span></div>
           <p class="row-message" role="status" aria-live="polite"></p>
           <div class="draft-actions" hidden><button type="button" data-action="retry">重试保存</button><button type="button" data-action="discard">放弃修改</button></div>
           <details class="product-binding"><summary>淘宝商品绑定</summary><label>商品 ID <input class="product-input" type="text" inputmode="numeric" pattern="[1-9][0-9]{0,19}" placeholder="商品链接中的 id" autocomplete="off" /></label><p>每个角色绑定一个独立商品；留空并保存可解除绑定。</p><button type="button" data-action="binding">保存绑定</button></details>`;
@@ -102,6 +102,11 @@
       if (!draft || !Object.hasOwn(draft.patch, 'quantity')) quantity.value = item.quantity ?? '';
       if (!draft || !Object.hasOwn(draft.patch, 'numIid')) product.value = item.numIid;
       quantity.disabled = product.disabled = !password || Boolean(draft?.saving);
+      const rawQuantity = draft && Object.hasOwn(draft.patch, 'quantity') ? draft.patch.quantity : item.quantity;
+      const currentQuantity = rawQuantity === null ? 0 : /^\d+$/.test(String(rawQuantity)) ? Number(rawQuantity) : NaN;
+      const stepDisabled = !password || Boolean(draft?.saving || draft?.conflict) || !Number.isInteger(currentQuantity) || currentQuantity < 0 || currentQuantity > 999999;
+      row.querySelector('[data-action="decrease"]').disabled = stepDisabled || currentQuantity <= 0;
+      row.querySelector('[data-action="increase"]').disabled = stepDisabled || currentQuantity >= 999999;
       row.querySelector('[data-action="binding"]').disabled = !password || Boolean(draft?.saving);
       row.querySelector('.row-message').textContent = draft?.message || (item.updatedAt ? `已保存到服务器 · ${date(item.updatedAt)}` : '解锁后可录入数量');
       row.querySelector('.row-message').classList.toggle('save-error', Boolean(draft?.error));
@@ -187,8 +192,21 @@
     if (event.key === 'Enter' && event.target.matches('input')) { event.preventDefault(); save(event.target.closest('.inventory-card').dataset.id); }
   });
   list.addEventListener('click', (event) => {
-    const action = event.target.dataset.action;
-    const id = event.target.closest('.inventory-card')?.dataset.id;
+    const button = event.target.closest('button[data-action]');
+    if (!button || button.disabled) return;
+    const action = button.dataset.action;
+    const id = button.closest('.inventory-card')?.dataset.id;
+    if (action === 'decrease' || action === 'increase') {
+      const item = items.find((entry) => entry.id === id);
+      const draft = drafts.get(id);
+      if (!item || !password || draft?.saving || draft?.conflict) return;
+      const rawQuantity = draft && Object.hasOwn(draft.patch, 'quantity') ? draft.patch.quantity : item.quantity;
+      const currentQuantity = rawQuantity === null ? 0 : /^\d+$/.test(String(rawQuantity)) ? Number(rawQuantity) : NaN;
+      const next = currentQuantity + (action === 'increase' ? 1 : -1);
+      if (!Number.isInteger(next) || next < 0 || next > 999999) return;
+      rows.get(id).querySelector('.quantity-input').value = String(next);
+      edit(id, 'quantity', String(next));
+    }
     if (action === 'binding' || action === 'retry') save(id);
     if (action === 'discard') {
       clearTimeout(drafts.get(id)?.timer);
